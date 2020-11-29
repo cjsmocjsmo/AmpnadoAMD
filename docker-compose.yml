@@ -1,0 +1,110 @@
+# to update 
+# docker-compose stop
+# docker-compose pull
+# docker-compose up -d
+
+version: "3.3"
+
+# services:
+#   db:
+#     image: mongo:latest
+#     #image: andresvidal/rpi3-mongodb3:latest
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#     networks:
+#       - ampnadoamd
+#     ports:
+#       - 27020:27020
+#     # volumes:
+#     #   - /home/teresa/AmpnadoamdDockerData/mongodbData:/data/db
+
+
+
+services:
+  mongo:
+    image: mongo
+    # restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - ampnadoamd
+    ports:
+      - 27017:27017
+
+  # mongo-express:
+  #   image: mongo-express
+  #   # restart: always
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+  #   networks:
+  #     - ampnadoamd
+  #   ports:
+  #     - 8081:8081
+
+  amp:
+    image: ampnadoamd:latest
+    build: .
+    environment:
+      - AMP_PROGRAM_PATH=/usr/share/Ampnadoamd
+      - AMP_AMPDB_ADDR=mongodb://mongo:27017/maindb
+      - AMP_VIEWSDB_ADDR=mongodb://mongo:27017/ampamdviewsDB
+      - AMP_PICDB_ADDR=mongodb://mongo:27017/ampamdpicDB
+      # - MONGO_INITDB_ROOT_USERNAME=root
+      # - MONGO_INITDB_ROOT_PASSWORD=example
+      - AMP_SETUP=1
+      - AMP_MEDIA_PATH=/usr/share/Ampnadoamd/Music
+      - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
+      - AMP_THUMBNAIL_DIR_PATH=/usr/share/Ampnadoamd/static/images/thumbnails
+      - AMP_NO_ART_PIC_PATH=/usr/share/Ampnadoamd/static/images/noartpic.jpg
+      - AMP_SERVER_ADDR=http://192.168.1.13
+      - AMP_SERVER_PORT=6789
+      - AMP_OFFSET_SIZE=45
+      - AMP_USERNAME=admin
+      - AMP_PASSWORD=ampnadoamd
+      # - bogus=bogus
+      # - fuck=fuck
+    networks:
+      - ampnadoamd
+    ports:
+      - 6789:6789
+    volumes:
+      # this points to where the music is located in the container
+      - ampnadoamdvol:/usr/share/Ampnadoamd/Music/
+      # this points to where our thumbnails are located in the container
+      - ampnadoamdpicvol:/usr/share/Ampnadoamd/static/images/thumbnails
+    depends_on:
+      - mongo
+
+networks:
+  ampnadoamd:
+
+volumes:
+  # mongovol:
+  #   driver: local
+  #   driver_opts: 
+  #     type: none
+  #     device: /home/teresa/AmpnadoamdDockerData/mongodbData
+  #     o: bind
+
+  ampnadoamdpicvol:
+    driver: local
+    driver_opts: 
+      type: none
+      #device: /home/pi/AmpnadoamdDockerData/picData
+      device: /home/charlie/AmpnadoamdDockerData/picData
+      o: bind
+
+  ampnadoamdvol:
+    driver: local
+    driver_opts:
+      type: none
+#THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
+      #device: /home/charlie/Music
+      #device: /home/teresa/Videos/media
+      #device: /media/pi/PiTB/
+      # device: /home/teresa/Music
+      device: /home/charlie/Music
+      o: bind
