@@ -5,44 +5,13 @@
 
 version: "3.3"
 
-# services:
-#   db:
-#     image: mongo:latest
-#     #image: andresvidal/rpi3-mongodb3:latest
-#     environment:
-#       MONGO_INITDB_ROOT_USERNAME: root
-#       MONGO_INITDB_ROOT_PASSWORD: example
-#     networks:
-#       - ampnadoamd
-#     ports:
-#       - 27020:27020
-#     # volumes:
-#     #   - /home/teresa/AmpnadoamdDockerData/mongodbData:/data/db
-
-
-
 services:
   mongo:
     image: mongo
-    # restart: always
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITDB_ROOT_PASSWORD: example
     networks:
       - ampnadoamd
     ports:
       - 27017:27017
-
-  # mongo-express:
-  #   image: mongo-express
-  #   # restart: always
-  #   environment:
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
-  #   networks:
-  #     - ampnadoamd
-  #   ports:
-  #     - 8081:8081
 
   amp:
     image: ampnadoamd:latest
@@ -52,8 +21,6 @@ services:
       - AMP_AMPDB_ADDR=mongodb://mongo:27017/maindb
       - AMP_VIEWSDB_ADDR=mongodb://mongo:27017/ampamdviewsDB
       - AMP_PICDB_ADDR=mongodb://mongo:27017/ampamdpicDB
-      # - MONGO_INITDB_ROOT_USERNAME=root
-      # - MONGO_INITDB_ROOT_PASSWORD=example
       - AMP_SETUP=1
       - AMP_MEDIA_PATH=/usr/share/Ampnadoamd/Music
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
@@ -93,7 +60,6 @@ volumes:
     driver: local
     driver_opts: 
       type: none
-      #device: /home/pi/AmpnadoamdDockerData/picData
       device: /home/charlie/AmpnadoamdDockerData/picData
       o: bind
 
@@ -102,9 +68,5 @@ volumes:
     driver_opts:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
-      #device: /home/charlie/Music
-      #device: /home/teresa/Videos/media
-      #device: /media/pi/PiTB/
-      # device: /home/teresa/Music
       device: /home/charlie/Music
       o: bind
