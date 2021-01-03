@@ -9,7 +9,7 @@ services:
   mongo:
     image: mongo
     networks:
-      - ampnadoamd
+      - ampnado
     ports:
       - 27017:27017
 
@@ -17,31 +17,31 @@ services:
     image: ampnadoamd:latest
     build: .
     environment:
-      - AMP_PROGRAM_PATH=/usr/share/Ampnadoamd
+      - AMP_PROGRAM_PATH=/usr/share/Ampnado
       - AMP_AMPDB_ADDR=mongodb://mongo:27017/maindb
       - AMP_VIEWSDB_ADDR=mongodb://mongo:27017/ampamdviewsDB
       - AMP_PICDB_ADDR=mongodb://mongo:27017/ampamdpicDB
       - AMP_SETUP=1
-      - AMP_MEDIA_PATH=/usr/share/Ampnadoamd/Music
+      - AMP_MEDIA_PATH=/usr/share/Ampnado/Music
       - AMP_HTTP_THUMBNAIL_DIR_PATH=/static/images/thumbnails
-      - AMP_THUMBNAIL_DIR_PATH=/usr/share/Ampnadoamd/static/images/thumbnails
-      - AMP_NO_ART_PIC_PATH=/usr/share/Ampnadoamd/static/images/noartpic.jpg
+      - AMP_THUMBNAIL_DIR_PATH=/usr/share/Ampnado/static/images/thumbnails
+      - AMP_NO_ART_PIC_PATH=/usr/share/Ampnado/static/images/noartpic.jpg
       - AMP_SERVER_ADDR=http://192.168.1.13
       - AMP_SERVER_PORT=6789
       - AMP_OFFSET_SIZE=45
       - AMP_USERNAME=admin
-      - AMP_PASSWORD=ampnadoamd
+      - AMP_PASSWORD=ampnado
       # - bogus=bogus
       # - fuck=fuck
     networks:
-      - ampnadoamd
+      - ampnado
     ports:
       - 6789:6789
     volumes:
       # this points to where the music is located in the container
-      - ampnadoamdvol:/usr/share/Ampnadoamd/Music/
+      - ampnadovol:/usr/share/Ampnado/Music/
       # this points to where our thumbnails are located in the container
-      - ampnadoamdpicvol:/usr/share/Ampnadoamd/static/images/thumbnails
+      - ampnadopicvol:/usr/share/Ampnado/static/images/thumbnails
     depends_on:
       - mongo
 
