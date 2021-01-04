@@ -56,14 +56,14 @@ volumes:
   #     device: /home/teresa/AmpnadoamdDockerData/mongodbData
   #     o: bind
 
-  ampnadoamdpicvol:
+  ampnadopicvol:
     driver: local
     driver_opts: 
       type: none
       device: /home/charlie/AmpnadoamdDockerData/picData
       o: bind
 
-  ampnadoamdvol:
+  ampnadovol:
     driver: local
     driver_opts:
       type: none
