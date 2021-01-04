@@ -38,9 +38,7 @@ services:
     ports:
       - 6789:6789
     volumes:
-      # this points to where the music is located in the container
       - ampnadovol:/usr/share/Ampnado/Music/
-      # this points to where our thumbnails are located in the container
       - ampnadopicvol:/usr/share/Ampnado/static/images/thumbnails
     depends_on:
       - mongo
