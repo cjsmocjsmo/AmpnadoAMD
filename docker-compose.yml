@@ -44,7 +44,7 @@ services:
       - mongo
 
 networks:
-  ampnadoamd:
+  ampnado:
 
 volumes:
   # mongovol:
