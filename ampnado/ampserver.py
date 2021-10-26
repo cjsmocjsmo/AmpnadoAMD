@@ -89,10 +89,6 @@ class Application(tornado.web.Application):
 			(r"/ArtistSearch", ArtistSearchHandler),
 			(r"/AlbumSearch", AlbumSearchHandler),
 			(r"/SongSearch", SongSearchHandler),
-			# (r"/CreateBackup", CreateBackupHandler),
-			# (r"/UpdateBackup", UpdateBackupHandler),
-			# (r"/DeleteBackpu", DeleteBackupHandler),
-
 		]
 		settings = dict(
 			static_path = "/usr/share/Ampnado/static",
