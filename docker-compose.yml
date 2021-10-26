@@ -7,7 +7,7 @@ version: "3.3"
 
 services:
   mongo:
-    image: mongo
+    image: mongo:4.2.0
     networks:
       - ampnado
     ports:
@@ -31,8 +31,7 @@ services:
       - AMP_OFFSET_SIZE=45
       - AMP_USERNAME=admin
       - AMP_PASSWORD=ampnado
-      # - bogus=bogus
-      # - fuck=fuck
+
     networks:
       - ampnado
     ports:
@@ -47,12 +46,6 @@ networks:
   ampnado:
 
 volumes:
-  # mongovol:
-  #   driver: local
-  #   driver_opts: 
-  #     type: none
-  #     device: /home/teresa/AmpnadoamdDockerData/mongodbData
-  #     o: bind
 
   ampnadopicvol:
     driver: local
