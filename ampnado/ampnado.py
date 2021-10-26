@@ -22,8 +22,6 @@ import os, time, argparse, glob
 #import inputs as gp
 import functions as fun
 import findjpgs as fj
-import backup as BUP
-import parseJSONbackups as PJB
 from data import Data
 from pymongo import MongoClient
 from pprint import pprint
