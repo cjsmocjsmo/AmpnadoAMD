@@ -1,4 +1,4 @@
-FROM amp-build-deps:latest
+FROM amp-build-deps-amd:1.0
 
 RUN \
 	mkdir /usr/share/Ampnado && \

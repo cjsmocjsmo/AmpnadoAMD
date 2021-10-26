@@ -58,7 +58,7 @@ volumes:
     driver: local
     driver_opts: 
       type: none
-      device: /home/charlie/AmpnadoamdDockerData/picData
+      device: /home/teresa/Ampnado-AMD-Docker-Data/picdata
       o: bind
 
   ampnadovol:
@@ -66,5 +66,5 @@ volumes:
     driver_opts:
       type: none
 #THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
-      device: /home/charlie/Music
+      device: /home/teresa/Music/music
       o: bind
