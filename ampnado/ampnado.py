@@ -60,88 +60,70 @@ class SetUp():
 
 
 		print("STARTING MAIN")
-		ckdir = "/usr/share/Ampnado/AmpBackup/ampnadoDB/main/*.json"
-		if len(glob.glob(ckdir)) != 0:
-			boo = PJB.ParseMyXML()
-			print('STARTING PARSE XML')
-			boo.parseAllXML()
-		else:
-			print("THIS IS ELSE BLOCK")
-			self.FUN.find_music(os.environ["AMP_MEDIA_PATH"])
-			
-			FJ = fj.FindMissingArt()
-			FJ.globstuff()
-			picdics = FJ.PicDics
-			Data().tags_update_artID(picdics)
-
-			btime = time.time()
-			maintime = btime - atime
-			print("Main DB setup time %s" % maintime)
-			
-			from functions import AddArtistId
-			AddArtistId().add_artistids()
-			ctime = time.time()
-			artidtime = ctime - atime
-			print("AddArtistId time %s" % artidtime)
-
-			from functions import AddAlbumId
-			AddAlbumId().add_albumids()
-			dtime = time.time()
-			albidtime = dtime - atime
-			print("AddAlbumId time %s" % albidtime)
-
-			from artistview import ArtistView
-			from artistview import ArtistChunkIt
-			AV = ArtistView().main()
-			ArtistChunkIt().main(AV, os.environ["AMP_OFFSET_SIZE"])
-			etime = time.time()
-			artistviewtime = etime - atime
-			print("Artistview time %s" % artistviewtime)		
-
-			from albumview import AlbumView
-			from albumview import AlbumChunkIt
-			ALBV = AlbumView().main()
-			AlbumChunkIt().main(ALBV, os.environ["AMP_OFFSET_SIZE"])
-			ftime = time.time()
-			albviewtime = ftime - atime
-			print("Albumview time %s" % albviewtime)		
-
-			from songview import SongView
-			SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
-			gtime = time.time()
-			songviewtime = gtime - atime
-			print("Songview time %s" % songviewtime)
-
-
-
-
-			bdirs = BUP.CreateBackupDirs()
-			bdirs.createbdir()
-			backup = BUP.CreateBackups()
-			backup.CreateAllBackups()
-
-
-			# from functions import Indexes
-			# Indexes().creat_db_indexes()
-			# htime = time.time()
-			# indextime = htime - atime
-			# print("Index time %s" % indextime)
-			
-			# from functions import DbStats
-			# DbStats().db_stats()
-			# itime = time.time()
-			# statstime = itime - atime
-			# print("DBStats time is %s" % statstime)
-
-			# from functions import RandomArtDb
-			# RandomArtDb().create_random_art_db()
-			# jtime = time.time()
-			# ranarttime = jtime - atime
-			# print("RandomArtDB time is %s" % ranarttime)
-
-			ptime = time.time()
-			t = ptime - atime
-			print("SETUP HAS BEEN COMPLETED IN %s SECONDS" % t)
+		
+		print("THIS IS ELSE BLOCK")
+		self.FUN.find_music(os.environ["AMP_MEDIA_PATH"])
+		
+		FJ = fj.FindMissingArt()
+		FJ.globstuff()
+		picdics = FJ.PicDics
+		Data().tags_update_artID(picdics)
+		btime = time.time()
+		maintime = btime - atime
+		print("Main DB setup time %s" % maintime)
+		
+		from functions import AddArtistId
+		AddArtistId().add_artistids()
+		ctime = time.time()
+		artidtime = ctime - atime
+		print("AddArtistId time %s" % artidtime)
+		from functions import AddAlbumId
+		AddAlbumId().add_albumids()
+		dtime = time.time()
+		albidtime = dtime - atime
+		print("AddAlbumId time %s" % albidtime)
+		from artistview import ArtistView
+		from artistview import ArtistChunkIt
+		AV = ArtistView().main()
+		ArtistChunkIt().main(AV, os.environ["AMP_OFFSET_SIZE"])
+		etime = time.time()
+		artistviewtime = etime - atime
+		print("Artistview time %s" % artistviewtime)		
+		from albumview import AlbumView
+		from albumview import AlbumChunkIt
+		ALBV = AlbumView().main()
+		AlbumChunkIt().main(ALBV, os.environ["AMP_OFFSET_SIZE"])
+		ftime = time.time()
+		albviewtime = ftime - atime
+		print("Albumview time %s" % albviewtime)		
+		from songview import SongView
+		SongView().create_songView_db(os.environ["AMP_OFFSET_SIZE"])
+		gtime = time.time()
+		songviewtime = gtime - atime
+		print("Songview time %s" % songviewtime)
+		# bdirs = BUP.CreateBackupDirs()
+		# bdirs.createbdir()
+		# backup = BUP.CreateBackups()
+		# backup.CreateAllBackups()
+		# from functions import Indexes
+		# Indexes().creat_db_indexes()
+		# htime = time.time()
+		# indextime = htime - atime
+		# print("Index time %s" % indextime)
+		
+		# from functions import DbStats
+		# DbStats().db_stats()
+		# itime = time.time()
+		# statstime = itime - atime
+		# print("DBStats time is %s" % statstime)
+		# from functions import RandomArtDb
+		# RandomArtDb().create_random_art_db()
+		# jtime = time.time()
+		# ranarttime = jtime - atime
+		# print("RandomArtDB time is %s" % ranarttime)
+		ptime = time.time()
+		t = ptime - atime
+		print("SETUP HAS BEEN COMPLETED IN %s SECONDS" % t)
 
 if __name__ == "__main__":
 	su = SetUp()
