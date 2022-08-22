@@ -282,9 +282,11 @@ class AllPlaylistSongsFromDBHandler(BaseHandler):
 	def _get_songs_for_playlist(self, aplid):
 		try:
 			for playlist in db.playlists.find({'playlistid': aplid}):
-			 return [[pl['Song'], pl['SongId']] for pl in playlist['songs']]
-		except KeyError: return []
-		except TypeError: return []
+				return [[pl['Song'], pl['SongId']] for pl in playlist['songs']]
+		except (KeyError, TypeError):
+			return []
+		# except KeyError: return []
+		# except TypeError: return []
 
 	@tornado.web.authenticated
 	@tornado.gen.coroutine		
@@ -573,7 +575,10 @@ class RandomPicsHandler(BaseHandler):
 
 def main():
 	tornado.options.parse_command_line()
-	http_server = tornado.httpserver.HTTPServer(Application())
+	http_server = tornado.httpserver.HTTPServer(Application(), ssl_options = {
+		'certfile': '/usr/share/Ampnado/cert.pem',
+        'keyfile': '/usr/share/Ampnado/key.pem',
+    })
 	http_server.listen(options.server_port)
 	tornado.ioloop.IOLoop.instance().start()
 	

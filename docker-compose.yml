@@ -1,8 +1,3 @@
-# to update 
-# docker-compose stop
-# docker-compose pull
-# docker-compose up -d
-
 version: "3.3"
 
 services:
@@ -51,6 +46,7 @@ volumes:
     driver: local
     driver_opts: 
       type: none
+#THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE THE DEVICE
       device: /home/pipi/Ampnado-AMD-Docker-Data/picdata
       o: bind
 
@@ -58,6 +54,6 @@ volumes:
     driver: local
     driver_opts:
       type: none
-#THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE PI
+#THIS NEEDS TO BE CHANGE TO THE CORRECT PATH ON THE THE DEVICE
       device: /home/pipi/Music/music
       o: bind
